@@ -25,14 +25,13 @@ docker-compose exec web python manage.py createsuperuser
 POST → **http://localhost:8000/api/token/**  
 
 Тело запроса:
-```json
 {
 "username": "ваш_логин",
 "password": "ваш_пароль"
 }
 В ответе получите поле access — это ваш JWT-токен.
-Использование Swagger
 
+Использование Swagger
 Откройте http://localhost:8000/api/swagger/
 Нажмите зелёную кнопку Authorize в правом верхнем углу
 В поле вставьте:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.xxxxxxxxxx(слово Bearer + пробел + токен из поля access)
