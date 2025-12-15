@@ -1,60 +1,53 @@
-# Project_Aminov_6 — RESTful API туристического агентства
+# Project_Aminov_6
+RESTful API туристического агентства на Django REST Framework (JWT, PostgreSQL, Docker).
+## Запуск в Docker Desktop
 
-## Инструкция по запуску проекта
-
-1. **Клонировать или скопировать проект**
-git clone https://github.com/VADG3RN/Project_Aminov_6.git
-cd Project_Aminov_6
-Или просто распакуйте архив/скопируйте файлы в папку `Project_Aminov_6`.
-
-2. **Создать файл .env**
-cp .env.example .env
-Значения по умолчанию подходят для локального запуска. При необходимости отредактируйте файл.
-
-3. **Запустить контейнеры**
-docker-compose up --build
+1. Клонируй: 
+`git clone https://github.com/VADG3RN/Project_Aminov_6.git`
+2. Перейди в папку:
+`cd Project_Aminov_6`
+3. Создай .env в корне.
+`cp .env.example .env`
+5. В терминале проекта запусти:
+`docker-compose up --build`
 Миграции базы данных применятся автоматически при первом запуске.
-
-4. **Создать суперпользователя** (для входа в админку)
-docker-compose exec web python manage.py createsuperuser
-Введите:
-- username (например, `admin`)
-- email (можно пропустить — просто Enter)
-- пароль (два раза)
-
-5. **Готово!**
-- Документация API (Swagger): **http://localhost:8000/api/swagger/**
-- Админ-панель Django: **http://localhost:8000/admin/** (логин и пароль от суперпользователя)
+6. Создай superuser:
+`docker-compose exec web python manage.py createsuperuser`
+Открой Swagger-документацию: http://localhost:8000/api/swagger/
+Админка: http://localhost:8000/admin/ (логин/пароль от superuser)
+Останови:
+`docker-compose down`.
 
 ## Получение JWT-токена
 
-Выполните POST-запрос на `/api/token/` (лучше всего в Swagger).
-
+В Swagger открой POST /api/register/ → создай пользователя.
+Выполните POST-запрос на /api/token/.
 Тело запроса:
-{
-"username": "ваш_логин",
-"password": "ваш_пароль"
+{ 
+"username": "ваш_логин", 
+"password": "ваш_пароль" 
 }
 В ответе будет поле access — это ваш JWT-токен.
-Как пользоваться Swagger
-
 Откройте http://localhost:8000/api/swagger/
 В правом верхнем углу нажмите зелёную кнопку Authorize
-В поле вставьте: Bearer ваш_токен_из_поля_access(обязательно слово Bearer + пробел + токен)
+В поле вставьте: Bearer ваш_токен_из_поля_access (обязательно слово Bearer + пробел + токен)
 Нажмите Authorize → Close
-
 Теперь все запросы в Swagger отправляются с авторизацией.
-Полезные команды
+
+## Полезные команды
 
 Остановить контейнеры (данные в PostgreSQL сохранятся): docker-compose down
-Перезапустить контейнеры: docker-compose restart
-Посмотреть логи сервера: docker-compose logs -f web
+Перезапустить контейнеры: 
+`docker-compose restart`
+Посмотреть логи сервера: 
+`docker-compose logs -f web`
 
 Основные эндпоинты API
+- /api/countries/ — страны (чтение без авторизации, создание/изменение/удаление — с JWT)
+- /api/tours/ — туры (чтение без авторизации, создание/изменение/удаление — с JWT)
+- /api/bookings/ — бронирования (только авторизованные пользователи, видны только свои)
+- /api/register/ — регистрация нового пользователя
+- /api/token/ — получение JWT-токена
+- /api/token/refresh/ — обновление токена
 
-/api/countries/ — страны (чтение без авторизации, создание/изменение/удаление — с JWT)
-/api/tours/ — туры (чтение без авторизации, создание/изменение/удаление — с JWT)
-/api/bookings/ — бронирования (только авторизованные пользователи, видны только свои)
-/api/register/ — регистрация нового пользователя
-/api/token/ — получение JWT-токена
-/api/token/refresh/ — обновление токена
+GitHub: https://github.com/VADG3RN/Project_Aminov_6
