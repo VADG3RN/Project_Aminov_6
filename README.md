@@ -1,25 +1,25 @@
-# Project_Aminov_6 — RESTful API туристического агентства
+Markdown# Project_Aminov_6 — RESTful API туристического агентства
 
 ## Инструкция по запуску проекта
 
 1. **Клонировать или скопировать проект**
 git clone https://github.com/VADG3RN/Project_Aminov_6.git
 cd Project_Aminov_6
-(или просто распакуйте архив/скопируйте файлы в папку Project_Aminov_6)
+textИли просто распакуйте архив/скопируйте файлы в папку `Project_Aminov_6`.
 
 2. **Создать файл .env**
 cp .env.example .env
-Значения по умолчанию подходят для локального запуска. При необходимости отредактируйте файл.
+textЗначения по умолчанию подходят для локального запуска. При необходимости отредактируйте файл.
 
 3. **Запустить контейнеры**
 docker-compose up --build
-Миграции базы данных применятся автоматически при первом запуске.
+textМиграции базы данных применятся автоматически при первом запуске.
 
 4. **Создать суперпользователя** (для входа в админку)
 docker-compose exec web python manage.py createsuperuser
-Введите:
+textВведите:
 - username (например, `admin`)
-- email (можно пропустить, просто Enter)
+- email (можно пропустить — просто Enter)
 - пароль (два раза)
 
 5. **Готово!**
@@ -28,9 +28,10 @@ docker-compose exec web python manage.py createsuperuser
 
 ## Получение JWT-токена
 
-Выполните POST-запрос на **/api/token/** (в Swagger или через curl).
+Выполните POST-запрос на `/api/token/` (лучше всего в Swagger).
 
 Тело запроса:
+
 {
 "username": "ваш_логин",
 "password": "ваш_пароль"
@@ -40,15 +41,15 @@ docker-compose exec web python manage.py createsuperuser
 
 Откройте http://localhost:8000/api/swagger/
 В правом верхнем углу нажмите зелёную кнопку Authorize
-В поле вставьте: Bearer ваш_токен_из_поля_access(обязательно слово Bearer + пробел + токен)
+В поле вставьте:textBearer ваш_токен_из_поля_access(обязательно слово Bearer + пробел + токен)
 Нажмите Authorize → Close
 
 Теперь все запросы в Swagger отправляются с авторизацией.
 Полезные команды
 
-Остановить контейнеры (данные в PostgreSQL сохранятся): docker-compose down
-Перезапустить: docker-compose restart
-Посмотреть логи сервера: docker-compose logs -f web
+Остановить контейнеры (данные в PostgreSQL сохранятся):textdocker-compose down
+Перезапустить контейнеры:textdocker-compose restart
+Посмотреть логи сервера:textdocker-compose logs -f web
 
 Основные эндпоинты API
 
