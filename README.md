@@ -1,4 +1,4 @@
-Project_Aminov_6 — RESTful API туристического агентства
+## Project_Aminov_6 — RESTful API туристического агентства
 
 ## Инструкция по запуску проекта
 
@@ -17,7 +17,7 @@ Project_Aminov_6 — RESTful API туристического агентства
 Миграции базы данных применятся автоматически при первом запуске.  
 
 5. **Создать суперпользователя** (для входа в админку)  
-`docker-compose exec web python manage.py createsuperuser`
+`docker-compose exec web python manage.py createsuperuser`  
 Введите:  
 `username (например, `admin`)`  
 `email (можно пропустить — просто Enter)`  
@@ -29,9 +29,9 @@ Project_Aminov_6 — RESTful API туристического агентства
 Админ-панель Django:
 **http://localhost:8000/admin/** (логин и пароль от суперпользователя)
   
-## Получение JWT-токена
-- Выполните POST-запрос на `/api/token/` (лучше всего в Swagger).
-- Тело запроса:
+## Получение JWT-токена  
+Выполните POST-запрос на `/api/token/` (лучше всего в Swagger).  
+Тело запроса:  
 {  
 "username": "ваш_логин",  
 "password": "ваш_пароль"  
@@ -39,19 +39,15 @@ Project_Aminov_6 — RESTful API туристического агентства
 В ответе будет поле access — это ваш JWT-токен.
   
 ## Как пользоваться Swagger  
-Откройте http://localhost:8000/api/swagger/  
-В правом верхнем углу нажмите зелёную кнопку `Authorize`  
-В поле вставьте:  
-Bearer ваш_токен_из_поля_access(обязательно слово Bearer + пробел + токен).  
-Нажмите `Authorize → Close`  
+1. **Откройте http://localhost:8000/api/swagger/**  
+2. **В правом верхнем углу нажмите зелёную кнопку `Authorize`**  
+3. **В поле вставьте: `Bearer ваш_токен_из_поля_access(обязательно слово Bearer + пробел + токен).`**  
+4. **Нажмите `Authorize → Close`**  
 Теперь все запросы в Swagger отправляются с авторизацией.  
 ## Полезные команды  
-
-Остановить контейнеры (данные в PostgreSQL сохранятся): docker-compose down  
-  
-Перезапустить контейнеры: docker-compose restart  
-  
-Посмотреть логи сервера: docker-compose logs -f web  
+Остановить контейнеры (данные в PostgreSQL сохранятся): `docker-compose down`  
+Перезапустить контейнеры: `docker-compose restart`  
+Посмотреть логи сервера: `docker-compose logs -f web`
 ## Основные эндпоинты API
 /api/countries/ — страны (чтение без авторизации, создание/изменение/удаление — с JWT)  
 /api/tours/ — туры (чтение без авторизации, создание/изменение/удаление — с JWT)  
